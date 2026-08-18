@@ -1,0 +1,25 @@
+# Python (Arquivos gerados automaticamente)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Pasta para debug
+tools/
+
+# Pastas de saída/testes locais
+output/
+data/*
+!data/.gitkeep
+!data/mensagem_zap.example.txt
+
+# Arquivos temporários do Microsoft Word
+~$*.docx
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db

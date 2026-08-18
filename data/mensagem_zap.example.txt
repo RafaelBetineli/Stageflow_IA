@@ -1,0 +1,46 @@
+Nome aluno: Aluno Exemplo
+RA: 00000000
+Telefone aluno: (00) 00000-0000
+E-mail aluno: aluno@example.invalid
+CPF: 000.000.000-00
+RG: 00.000.000-0
+Endereço aluno: Rua Exemplo, 100
+Bairro aluno: Centro
+Cidade aluno: Cidade Exemplo
+Estado aluno: SP
+CEP aluno: 00000-000
+Semestre: 8º semestre
+Campus: Campus Exemplo
+Período: Noturno
+Número da apólice: 000000000
+Seguradora: Seguradora Exemplo
+Data início vigência: 01/01/2026
+Data fim vigência: 31/12/2026
+Nome fantasia: Farmácia Exemplo
+Razão social: Empresa Exemplo Ltda.
+CNPJ: 00.000.000/0000-00
+Ramo empresa: Serviços farmacêuticos
+Endereço empresa: Avenida Exemplo, 200
+Bairro empresa: Centro
+Cidade empresa: Cidade Exemplo
+Telefone empresa: (00) 0000-0000
+Nome RT: Responsável Técnico Exemplo
+E-mail RT: responsavel@example.invalid
+Conselho RT: CRF-SP 000000
+Cargo representante: Farmacêutico responsável técnico
+Área estágio: Drogaria
+Data início estágio: 02/02/2026
+Data fim estágio: 30/06/2026
+Carga horária: 300 horas
+Carga horária semanal: 30 horas
+Dias de estágio: Segunda a sexta-feira
+Horário de estágio: 08h às 14h
+Módulo estágio: Estágio Supervisionado
+Dependência: Não
+Histórico dos módulos: Não se aplica
+História da empresa: Empresa de exemplo utilizada exclusivamente para validar a geração dos documentos.
+  O texto pode continuar em linhas recuadas sem repetir o nome do campo.
+Descrição da área: Setor de exemplo no qual o estudante acompanhou atividades compatíveis com a área informada.
+Relato de caso: Não se aplica.
+Interações medicamentosas: Não se aplica.
+Observações do plano: Atividades realizadas sob supervisão direta do responsável técnico.
