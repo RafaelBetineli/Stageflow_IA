@@ -54,7 +54,9 @@
         "quantidades financeiras ou volumes exatos movimentados em turnos reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -111,7 +113,9 @@
         "dados confidenciais de custos de aquisição e contratos de abastecimento"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -168,7 +172,9 @@
         "casos de reações graves reais ocorridos na instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_anvisa_2013_protocolo_medicamentos"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -225,7 +231,9 @@
         "quantidades numéricas exatas de unidades fracionadas em um turno real"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -281,7 +289,9 @@
         "números de incidentes ou taxas de erros de medicação reais da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2013_rdc36"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -338,7 +348,9 @@
         "nomes reais de salas cirúrgicas ou equipes de atendimento de plantão"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -394,7 +406,9 @@
         "quantidades financeiras ou custos de tratamentos com antimicrobianos de reserva"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -451,7 +465,9 @@
         "nomes de pacientes ou profissionais envolvidos em prescrições controladas reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "svs_1998_portaria344"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -508,7 +524,9 @@
         "especificações técnicas confidenciais das cabines de segurança biológica da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2004_rdc220"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -564,7 +582,9 @@
         "quantidades exatas de produtos avariados computadas em turnos reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -620,7 +640,9 @@
         "nomes reais de membros votantes ou gestores integrantes da comissão"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -677,7 +699,9 @@
         "dados confidenciais de eventos adversos graves ocorridos na instituição hospitalar"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_vigimed"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -733,7 +757,9 @@
         "esquemas terapêuticos específicos ou diagnósticos reais de pacientes da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2010_portaria4283"
+    ],
     "elementos_condicionais": []
   }
 ]

@@ -4,7 +4,11 @@ import json
 import unittest
 from pathlib import Path
 
-from activity_bibliography import BibliographyCatalog, BibliographyError
+from activity_bibliography import (
+    BibliographyCatalog,
+    BibliographyError,
+    load_project_bibliography_catalog,
+)
 from activity_contract import parse_activity_collection
 from activity_deterministic_composer import DeterministicActivityComposer
 from activity_narrative_planner import build_narrative_plan
@@ -30,6 +34,14 @@ class ActivityBibliographyTests(unittest.TestCase):
         for activity in self.activities:
             with self.subTest(title=activity.titulo):
                 self.catalog.validate_activity_ids(activity.referencias_ids)
+
+    def test_every_project_activity_has_a_resolvable_reference(self) -> None:
+        catalog = load_project_bibliography_catalog()
+        for knowledge_base in sorted((PROJECT_ROOT / "knowledge_base").glob("*.json")):
+            raw = json.loads(knowledge_base.read_text(encoding="utf-8"))
+            for activity in parse_activity_collection(raw):
+                with self.subTest(file=knowledge_base.name, title=activity.titulo):
+                    catalog.validate_activity_ids(activity.referencias_ids)
 
     def test_all_activities_receive_a_resolved_inline_citation(self) -> None:
         composer = DeterministicActivityComposer(

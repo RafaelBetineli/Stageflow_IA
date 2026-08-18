@@ -61,7 +61,9 @@
         "lotes e validades exatas dos medicamentos recebidos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -125,7 +127,9 @@
         "nomes de sistemas de software específicos de gestão de estoque"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -187,7 +191,9 @@
         "diagnósticos clínicos detalhados e sensíveis dos pacientes atendidos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -248,7 +254,9 @@
         "volumes exatos de caixas dispensadas para um indivíduo fictício"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2011_rdc20"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -310,7 +318,9 @@
         "dados reais e sensíveis de pacientes, compradores ou médicos prescritores (LGPD)"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "svs_1998_portaria344"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -369,7 +379,9 @@
         "dados pessoais sensíveis de pacientes atendidos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -432,7 +444,9 @@
         "dados reais e sensíveis de saúde dos pacientes (violação da LGPD)"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -494,7 +508,9 @@
         "volume exato em mililitros (mL) administrado em casos não padronizados"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -553,7 +569,9 @@
         "valores financeiros cobrados pela prestação do serviço na drogaria"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -612,7 +630,9 @@
         "valores financeiros exatos faturados pela drogaria ou números reais de autorização de transações"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "ms_2026_farmacia_popular"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -671,7 +691,9 @@
         "números de série ou laudos específicos de calibração"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -730,7 +752,9 @@
         "datas específicas de coleta terceirizada"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2018_rdc222"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -787,7 +811,9 @@
         "datas exatas de última revisão do manual de qualidade"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -844,7 +870,9 @@
         "marcas comerciais e lotes específicos envolvidos em queixas técnicas reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_vigimed"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -902,7 +930,9 @@
         "preços ou promoções comerciais específicas dos produtos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "brasil_2014_lei13021"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -959,7 +989,9 @@
         "nomes reais dos fiscais ou autoridades sanitárias"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2009_rdc44"
+    ],
     "elementos_condicionais": []
   }
 ]

@@ -336,6 +336,15 @@ def _strip_terminal_punctuation(text: str) -> str:
     return text.strip().rstrip(".!?;:")
 
 
+def _concise_citation_principle(text: str) -> str:
+    principle = _strip_terminal_punctuation(text)
+    if count_words(principle) <= 28 or "," not in principle:
+        return principle
+
+    first_clause = principle.split(",", 1)[0].strip()
+    return first_clause if count_words(first_clause) >= 5 else principle
+
+
 def _article_for(fact: str) -> str:
     normalized = fact.casefold()
     if normalized.startswith("orientações"):
@@ -353,7 +362,7 @@ def _opening_sentences(
 ) -> list[str]:
     opening_title = activity.titulo
     normalized_title = activity.titulo.casefold()
-    if any(
+    if normalized_title in activity.contexto_seguro.casefold() or any(
         normalized_title in fact.casefold()
         for group in FACT_GROUPS
         for fact in activity.fatos_permitidos.get(group)
@@ -366,12 +375,12 @@ def _opening_sentences(
         if part.strip()
     ]
     principle = context_parts[-1] if len(context_parts) > 1 else context_parts[0]
-    principle = re.sub(
+    principle = _concise_citation_principle(re.sub(
         r"^O princípio técnico observado é\s+",
         "",
         _strip_terminal_punctuation(principle),
         flags=re.IGNORECASE,
-    )
+    ))
     opening_index = (
         variation.index + activity_position - 1
     ) % len(OPENING_VARIANTS)

@@ -38,10 +38,9 @@ papel do estagiário e restrições de validação. A composição mantém o est
 como observador ou auxiliar sob supervisão e rejeita afirmações clínicas não
 autorizadas.
 
-As citações e referências bibliográficas são emitidas somente quando existe um
-catálogo verificado em `knowledge_base/references/`. Atualmente esse catálogo
-está completo para `biomedicina_estetica.json`. As bases de Farmácia não
-recebem citações até que seus catálogos reais sejam adicionados.
+As citações e referências bibliográficas são resolvidas a partir dos catálogos
+verificados em `knowledge_base/references/`. Todas as cinco áreas disponíveis
+possuem catálogo próprio, e cada atividade referencia ao menos uma fonte real.
 
 ## Requisitos
 
@@ -127,5 +126,5 @@ python -m compileall -q src tests
 O GitHub Actions executa a mesma suíte em cada `push` e `pull_request`.
 
 Antes de publicar uma nova knowledge base, toda atividade deve passar por
-`parse_activity_collection` e, quando houver `referencias_ids`, todos os IDs
-devem existir no catálogo correspondente.
+`parse_activity_collection`, possuir ao menos um item em `referencias_ids` e
+usar somente IDs existentes no catálogo correspondente.

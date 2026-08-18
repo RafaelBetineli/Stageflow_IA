@@ -125,10 +125,7 @@ class ActivityGeneratorIntegrationTests(unittest.TestCase):
                     self.assertFalse(text.startswith("Texto temporário"))
                     self.assertGreaterEqual(len(text.split()), 420)
 
-                if path.name == "biomedicina_estetica.json":
-                    self.assertTrue(result["REFERENCIAS"])
-                else:
-                    self.assertEqual("", result["REFERENCIAS"])
+                self.assertTrue(result["REFERENCIAS"])
 
 
 if __name__ == "__main__":

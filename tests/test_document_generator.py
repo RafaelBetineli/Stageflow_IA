@@ -7,7 +7,27 @@ from docx import Document
 from document_generator import DocumentGenerator, MissingPlaceholderValueError
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+
 class DocumentGeneratorTests(unittest.TestCase):
+    def test_report_templates_start_references_on_a_new_page(self) -> None:
+        templates = sorted(
+            (PROJECT_ROOT / "templates").glob("*/modelo_relatorio_*.docx")
+        )
+        self.assertTrue(templates)
+        for template in templates:
+            document = Document(template)
+            headings = [
+                paragraph
+                for paragraph in document.paragraphs
+                if paragraph.text.strip().upper() == "REFERÊNCIAS BIBLIOGRÁFICAS"
+            ]
+            with self.subTest(template=template.name):
+                self.assertEqual(1, len(headings))
+                self.assertTrue(headings[0].paragraph_format.page_break_before)
+                self.assertTrue(headings[0].paragraph_format.keep_with_next)
+
     def test_replaces_body_table_header_footer_and_split_runs(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

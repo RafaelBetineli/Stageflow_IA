@@ -53,7 +53,9 @@
         "dados financeiros ou comerciais confidenciais associados à aquisição dos insumos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -108,7 +110,9 @@
         "parâmetros proprietários de degradação ou patentes de estabilidade de produtos reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2019_rdc318"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -164,7 +168,9 @@
         "parâmetros financeiros ou multas sanitárias associadas a não conformidades"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -221,7 +227,9 @@
         "parâmetros proprietários ou fórmulas industriais confidenciais de limpeza da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -278,7 +286,9 @@
         "custos financeiros exatos ou contratos de manutenção de equipamentos da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -334,7 +344,9 @@
         "dados financeiros ou custos associados aos reagentes consumidos no laboratório"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -391,7 +403,9 @@
         "dados financeiros ou custos associados às análises físico-químicas realizadas"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -448,7 +462,9 @@
         "dados financeiros ou de produtividade real associados ao rendimento das máquinas"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -505,7 +521,9 @@
         "dados financeiros ou custos de manutenção dos instrumentos do laboratório analítico"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -561,7 +579,9 @@
         "dados financeiros ou custos de operação do laboratório microbiológico"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -618,7 +638,9 @@
         "dados financeiros ou custos associados à certificação e monitoramento ambiental"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -675,7 +697,9 @@
         "dados financeiros, vazões volumétricas reais ou custos operacionais do looping"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -730,7 +754,9 @@
         "dados financeiros ou custos associados ao armazenamento e descarte de medicamentos"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -787,7 +813,10 @@
         "dados financeiros ou custos associados ao processo de validação analítica"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2017_rdc166",
+      "ich_2025_q2r2"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -843,7 +872,9 @@
         "dados financeiros ou registros corporativos confidenciais contidos nos arquivos da qualidade"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2022_rdc658"
+    ],
     "elementos_condicionais": []
   }
 ]

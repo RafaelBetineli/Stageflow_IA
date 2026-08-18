@@ -51,7 +51,9 @@
         "quantidades financeiras ou dados confidenciais de transações comerciais do estabelecimento"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -107,7 +109,9 @@
         "nomes comerciais de marcas de insumos ou princípios ativos específicos de formulações reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -163,7 +167,9 @@
         "nomes comerciais exclusivos de marcas fornecedoras de insumos magistrais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -220,7 +226,9 @@
         "dados confidenciais de formulações patenteadas ou exclusivas de clientes reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -278,7 +286,9 @@
         "dados confidenciais de formulações magistrais exclusivas de prescritores ou clientes reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -335,7 +345,9 @@
         "quantidades reais e específicas de substâncias potentes manipuladas em turnos de produção"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -392,7 +404,9 @@
         "dados confidenciais de prescrições homeopáticas ou fitoterápicas de pacientes reais"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -449,7 +463,9 @@
         "dados confidenciais de laudos analíticos de matérias-primas ou produtos acabados da instituição"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2026_farmacopeia8"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -505,7 +521,9 @@
         "quantidades financeiras ou dados comerciais reais associados aos produtos embalados"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -561,7 +579,9 @@
         "cronogramas ou escalas nominais reais de higienização dos colaboradores do estabelecimento"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -617,7 +637,9 @@
         "dados confidenciais de inventários financeiros ou capacidade máxima real de armazenamento da empresa"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "anvisa_2007_rdc67"
+    ],
     "elementos_condicionais": []
   },
   {
@@ -673,7 +695,9 @@
         "nomes reais de pacientes, médicos prescritores ou dados confidenciais de movimentação de controle especial"
       ]
     },
-    "referencias_ids": [],
+    "referencias_ids": [
+      "svs_1998_portaria344"
+    ],
     "elementos_condicionais": []
   }
 ]
