@@ -43,6 +43,21 @@ class ActivityBibliographyTests(unittest.TestCase):
                 with self.subTest(file=knowledge_base.name, title=activity.titulo):
                     catalog.validate_activity_ids(activity.referencias_ids)
 
+    def test_project_reference_urls_are_unique(self) -> None:
+        seen_urls: dict[str, tuple[str, str]] = {}
+        directory = PROJECT_ROOT / "knowledge_base" / "references"
+        for catalog_path in sorted(directory.glob("*.json")):
+            raw = json.loads(catalog_path.read_text(encoding="utf-8"))
+            for reference in raw:
+                url = reference["url"]
+                with self.subTest(file=catalog_path.name, id=reference["id"]):
+                    self.assertNotIn(
+                        url,
+                        seen_urls,
+                        msg=f"URL tambem usada por {seen_urls.get(url)}",
+                    )
+                seen_urls[url] = (catalog_path.name, reference["id"])
+
     def test_all_activities_receive_a_resolved_inline_citation(self) -> None:
         composer = DeterministicActivityComposer(
             bibliography_catalog=self.catalog,

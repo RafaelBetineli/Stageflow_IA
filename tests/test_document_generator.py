@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 from document_generator import DocumentGenerator, MissingPlaceholderValueError
 
@@ -23,10 +24,21 @@ class DocumentGeneratorTests(unittest.TestCase):
                 for paragraph in document.paragraphs
                 if paragraph.text.strip().upper() == "REFERÊNCIAS BIBLIOGRÁFICAS"
             ]
+            placeholders = [
+                paragraph
+                for paragraph in document.paragraphs
+                if "{{REFERENCIAS}}" in paragraph.text
+            ]
             with self.subTest(template=template.name):
                 self.assertEqual(1, len(headings))
                 self.assertTrue(headings[0].paragraph_format.page_break_before)
                 self.assertTrue(headings[0].paragraph_format.keep_with_next)
+                self.assertEqual(1, len(placeholders))
+                self.assertEqual(WD_ALIGN_PARAGRAPH.LEFT, placeholders[0].alignment)
+                self.assertEqual(0, placeholders[0].paragraph_format.left_indent)
+                self.assertEqual(
+                    0, placeholders[0].paragraph_format.first_line_indent
+                )
 
     def test_replaces_body_table_header_footer_and_split_runs(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

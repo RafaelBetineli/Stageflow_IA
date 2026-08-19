@@ -62,7 +62,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "brasil_1973_lei5991"
     ],
     "elementos_condicionais": []
   },
@@ -128,7 +129,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "brasil_1973_lei5991"
     ],
     "elementos_condicionais": []
   },
@@ -192,7 +194,10 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "brasil_1973_lei5991",
+      "brasil_2014_lei13021",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -255,7 +260,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2011_rdc20"
+      "anvisa_2011_rdc20",
+      "anvisa_2021_rdc471",
+      "anvisa_2025_rdc973"
     ],
     "elementos_condicionais": []
   },
@@ -319,7 +326,9 @@
       ]
     },
     "referencias_ids": [
-      "svs_1998_portaria344"
+      "svs_1998_portaria344",
+      "anvisa_2014_rdc22_sngpc",
+      "anvisa_sngpc_servico_oficial"
     ],
     "elementos_condicionais": []
   },
@@ -380,7 +389,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -445,7 +455,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -509,7 +520,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -871,7 +883,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2026_vigimed"
+      "anvisa_2026_vigimed",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -931,7 +944,8 @@
       ]
     },
     "referencias_ids": [
-      "brasil_2014_lei13021"
+      "brasil_2014_lei13021",
+      "cff_2013_resolucao585"
     ],
     "elementos_condicionais": []
   },
@@ -990,7 +1004,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2009_rdc44"
+      "anvisa_2009_rdc44",
+      "brasil_1973_lei5991"
     ],
     "elementos_condicionais": []
   }

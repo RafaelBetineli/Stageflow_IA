@@ -55,7 +55,9 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492",
+      "who_medication_without_harm"
     ],
     "elementos_condicionais": []
   },
@@ -114,7 +116,8 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -173,7 +176,10 @@
       ]
     },
     "referencias_ids": [
-      "ms_anvisa_2013_protocolo_medicamentos"
+      "ms_anvisa_2013_protocolo_medicamentos",
+      "ms_2013_portaria529_pnsp",
+      "who_medication_without_harm",
+      "who_2024_medication_without_harm_policy"
     ],
     "elementos_condicionais": []
   },
@@ -232,7 +238,9 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "ms_anvisa_2013_protocolo_medicamentos",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -290,7 +298,10 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2013_rdc36"
+      "anvisa_2013_rdc36",
+      "ms_2013_portaria529_pnsp",
+      "who_medication_without_harm",
+      "who_2024_medication_without_harm_policy"
     ],
     "elementos_condicionais": []
   },
@@ -349,7 +360,9 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "ms_anvisa_2013_protocolo_medicamentos",
+      "ms_2013_portaria529_pnsp"
     ],
     "elementos_condicionais": []
   },
@@ -407,7 +420,8 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -466,7 +480,8 @@
       ]
     },
     "referencias_ids": [
-      "svs_1998_portaria344"
+      "svs_1998_portaria344",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -525,7 +540,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2004_rdc220"
+      "anvisa_2004_rdc220",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -583,7 +599,8 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -641,7 +658,8 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492"
     ],
     "elementos_condicionais": []
   },
@@ -700,7 +718,10 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2026_vigimed"
+      "anvisa_2026_vigimed",
+      "anvisa_2013_rdc36",
+      "ms_2013_portaria529_pnsp",
+      "who_medication_without_harm"
     ],
     "elementos_condicionais": []
   },
@@ -758,7 +779,9 @@
       ]
     },
     "referencias_ids": [
-      "ms_2010_portaria4283"
+      "ms_2010_portaria4283",
+      "cff_2008_resolucao492",
+      "who_2024_medication_without_harm_policy"
     ],
     "elementos_condicionais": []
   }

@@ -52,7 +52,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -110,7 +112,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_formulario_nacional_3ed",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -168,7 +172,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -227,7 +233,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_formulario_nacional_3ed",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -287,7 +295,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_formulario_nacional_3ed",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -346,7 +356,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -405,7 +417,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -464,7 +477,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2026_farmacopeia8"
+      "anvisa_2026_farmacopeia8",
+      "anvisa_2021_rdc512",
+      "who_2016_good_pharmacopoeial_practices"
     ],
     "elementos_condicionais": []
   },
@@ -522,7 +537,9 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87",
+      "cff_2023_resolucao753"
     ],
     "elementos_condicionais": []
   },
@@ -580,7 +597,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87"
     ],
     "elementos_condicionais": []
   },
@@ -638,7 +656,8 @@
       ]
     },
     "referencias_ids": [
-      "anvisa_2007_rdc67"
+      "anvisa_2007_rdc67",
+      "anvisa_2008_rdc87"
     ],
     "elementos_condicionais": []
   },
@@ -696,7 +715,9 @@
       ]
     },
     "referencias_ids": [
-      "svs_1998_portaria344"
+      "svs_1998_portaria344",
+      "anvisa_2014_rdc22_sngpc",
+      "anvisa_sngpc_servico_oficial"
     ],
     "elementos_condicionais": []
   }
