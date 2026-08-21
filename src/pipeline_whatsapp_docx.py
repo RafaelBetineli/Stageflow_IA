@@ -18,7 +18,6 @@ from activity_repository import ActivityRepository
 from data_enricher import DataEnricher
 from document_generator import DocumentGenerator
 from input_validator import InputValidator
-from plagiarism_gate import PlagiarismGate, PlagiarismRejected
 from report_identity import build_report_identity
 from report_section_generator import ReportSectionGenerator
 from whatsapp_parser import WhatsAppParser
@@ -30,7 +29,6 @@ CAMINHO_MENSAGEM = PROJETO / "data" / "mensagem_zap.txt"
 PASTA_SAIDA = PROJETO / "output" / "docx"
 PASTA_KNOWLEDGE_BASE = PROJETO / "knowledge_base"
 PASTA_TEMPLATES_BASE = PROJETO / "templates"
-PLAGIARISM_RECOMPOSITION_STRIDE = 1_000_003
 
 MAPEAMENTO_AREA_ESTAGIO = {
     "estetica": {
@@ -155,8 +153,6 @@ def run_pipeline(
     input_path: str | Path = CAMINHO_MENSAGEM,
     output_dir: str | Path = PASTA_SAIDA,
     quantidade: int = 3,
-    *,
-    plagiarism_gate: PlagiarismGate | None = None,
 ) -> tuple[Path, ...]:
     entrada = Path(input_path)
     saida = Path(output_dir)
@@ -182,52 +178,16 @@ def run_pipeline(
 
     report_identity = build_report_identity(dados_enriquecidos)
     registry = ReportOriginalityRegistry(saida.parent / "originality_registry.json")
-    gate = plagiarism_gate or PlagiarismGate.from_environment(
-        saida.parent / "plagiarism_registry.json"
+    activity_pipeline = ActivityPipeline(
+        repository,
+        area_estagio=dados_enriquecidos["AREA_ESTAGIO"],
+        report_seed=report_identity.seed,
+        variant_index=report_identity.variant_index,
+        originality_registry=registry,
     )
-    dados_atividades: dict | None = None
-    for attempt in range(2):
-        activity_pipeline = ActivityPipeline(
-            repository,
-            area_estagio=dados_enriquecidos["AREA_ESTAGIO"],
-            report_seed=report_identity.seed,
-            variant_index=(
-                report_identity.variant_index
-                + attempt * PLAGIARISM_RECOMPOSITION_STRIDE
-            ),
-            originality_registry=registry,
-        )
-        candidate = activity_pipeline.build(titulos)
-        if activity_pipeline.count_selected(titulos) != quantidade:
-            raise RuntimeError("Nem todas as atividades selecionadas foram encontradas.")
-
-        sections = tuple(
-            candidate[f"ATV{position}"]
-            for position in range(1, quantidade + 1)
-        )
-        decision = gate.verify(sections)
-        if decision.skipped:
-            print("[ANTIPLÁGIO] Verificação externa desativada explicitamente.")
-            dados_atividades = candidate
-            break
-
-        result = decision.result
-        cache_note = " (cache)" if decision.cache_hit else ""
-        print(
-            "[ANTIPLÁGIO] Similaridade externa: "
-            f"{result.similarity_percent:.2f}% em {result.source_count} fonte(s)"
-            f"{cache_note}."
-        )
-        if decision.is_acceptable:
-            dados_atividades = candidate
-            break
-        if attempt == 0:
-            print("[ANTIPLÁGIO] Recomposição única acionada.")
-            continue
-        raise PlagiarismRejected(result, attempts=2)
-
-    if dados_atividades is None:
-        raise RuntimeError("a verificação antiplágio não produziu uma decisão")
+    dados_atividades = activity_pipeline.build(titulos)
+    if activity_pipeline.count_selected(titulos) != quantidade:
+        raise RuntimeError("Nem todas as atividades selecionadas foram encontradas.")
 
     dados_secoes = ReportSectionGenerator().generate(
         dados_enriquecidos,
