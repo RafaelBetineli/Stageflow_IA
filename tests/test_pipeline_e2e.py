@@ -41,6 +41,49 @@ class PipelineEndToEndTests(unittest.TestCase):
                     text = "\n".join(paragraph.text for paragraph in document.paragraphs)
                     self.assertNotIn("Texto temporário", text)
 
+    def test_existing_document_is_preserved_without_overwrite(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            input_path = root / "entrada.txt"
+            output_dir = root / "docx"
+            input_path.write_text(EXAMPLE_TEXT, encoding="utf-8")
+            output_dir.mkdir()
+            existing = output_dir / "relatorio_aluno_exemplo.docx"
+            existing.write_bytes(b"documento anterior")
+
+            with self.assertRaisesRegex(FileExistsError, "--overwrite"):
+                run_pipeline(input_path, output_dir, quantidade=3)
+
+            self.assertEqual(b"documento anterior", existing.read_bytes())
+            self.assertFalse((root / "originality_registry.json").exists())
+            self.assertEqual([existing], list(output_dir.iterdir()))
+
+    def test_overwrite_replaces_existing_documents_explicitly(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            input_path = root / "entrada.txt"
+            output_dir = root / "docx"
+            input_path.write_text(EXAMPLE_TEXT, encoding="utf-8")
+            output_dir.mkdir()
+            expected = tuple(
+                output_dir / f"{prefixo}_aluno_exemplo.docx"
+                for prefixo in ("relatorio", "plano_estagio", "termo_compromisso")
+            )
+            for path in expected:
+                path.write_bytes(b"documento anterior")
+
+            outputs = run_pipeline(
+                input_path,
+                output_dir,
+                quantidade=3,
+                overwrite=True,
+            )
+
+            self.assertEqual(expected, outputs)
+            for output in outputs:
+                self.assertNotEqual(b"documento anterior", output.read_bytes())
+                Document(output)
+
 
 if __name__ == "__main__":
     unittest.main()

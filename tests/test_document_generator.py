@@ -85,6 +85,52 @@ class DocumentGeneratorTests(unittest.TestCase):
 
             self.assertEqual(b"conteudo anterior", output.read_bytes())
 
+    def test_adds_updatable_table_of_contents_after_sumario_heading(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            template = root / "template.docx"
+            output = root / "output.docx"
+            doc = Document()
+            doc.add_paragraph("SUMÁRIO")
+            doc.add_paragraph()
+            doc.add_paragraph()
+            doc.add_paragraph()
+            doc.add_paragraph("1. INTRODUÇÃO", style="Heading 1")
+            doc.add_paragraph("1.1 Contexto", style="Heading 2")
+            doc.save(template)
+
+            DocumentGenerator(template).generate({}, output)
+
+            generated = Document(output)
+            instructions = generated.element.body.xpath(".//w:instrText")
+            self.assertEqual(1, len(instructions))
+            self.assertIn('TOC \\o "1-2"', instructions[0].text)
+            update_fields = generated.settings._element.find(
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}updateFields"
+            )
+            self.assertIsNotNone(update_fields)
+            self.assertEqual(
+                "true",
+                update_fields.get(
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val"
+                ),
+            )
+            introduction = next(
+                paragraph
+                for paragraph in generated.paragraphs
+                if paragraph.text == "1. INTRODUÇÃO"
+            )
+            self.assertTrue(introduction.paragraph_format.page_break_before)
+            self.assertEqual(
+                [
+                    "SUMÁRIO",
+                    "Atualize o sumário ao abrir o documento.",
+                    "1. INTRODUÇÃO",
+                    "1.1 Contexto",
+                ],
+                [paragraph.text for paragraph in generated.paragraphs],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

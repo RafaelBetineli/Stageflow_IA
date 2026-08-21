@@ -7,6 +7,9 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from docx import Document
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.text.paragraph import Paragraph
 
 
 PLACEHOLDER_PATTERN = re.compile(r"\{\{\s*([^{}]+?)\s*\}\}")
@@ -51,6 +54,8 @@ class DocumentGenerator:
             raise UnresolvedPlaceholderError(
                 "Placeholders não resolvidos: " + ", ".join(unresolved)
             )
+
+        self._ensure_table_of_contents(doc)
 
         output.parent.mkdir(parents=True, exist_ok=True)
         temporary_path: Path | None = None
@@ -123,6 +128,69 @@ class DocumentGenerator:
                     match.end(),
                     str(data[key]),
                 )
+
+    @staticmethod
+    def _ensure_table_of_contents(doc) -> None:
+        headings = [
+            paragraph
+            for paragraph in doc.paragraphs
+            if paragraph.text.strip().casefold() == "sumário"
+        ]
+        if not headings:
+            return
+
+        instructions = doc.element.body.xpath(".//w:instrText")
+        if any("TOC" in (instruction.text or "").upper() for instruction in instructions):
+            return
+
+        paragraphs = doc.paragraphs
+        heading_index = next(
+            index
+            for index, paragraph in enumerate(paragraphs)
+            if paragraph._p is headings[0]._p
+        )
+        next_content = None
+        for paragraph in paragraphs[heading_index + 1 :]:
+            if paragraph.text.strip():
+                next_content = paragraph
+                break
+            protected_content = paragraph._p.xpath(
+                ".//w:drawing | .//w:pict | .//w:fldChar | .//w:instrText"
+            )
+            if not protected_content:
+                paragraph._element.getparent().remove(paragraph._element)
+        if next_content is not None:
+            next_content.paragraph_format.page_break_before = True
+
+        toc_xml = OxmlElement("w:p")
+        headings[0]._p.addnext(toc_xml)
+        toc = Paragraph(toc_xml, headings[0]._parent)
+
+        begin = OxmlElement("w:fldChar")
+        begin.set(qn("w:fldCharType"), "begin")
+        begin.set(qn("w:dirty"), "true")
+        toc.add_run()._r.append(begin)
+
+        instruction = OxmlElement("w:instrText")
+        instruction.set(qn("xml:space"), "preserve")
+        instruction.text = ' TOC \\o "1-2" \\h \\z \\u '
+        toc.add_run()._r.append(instruction)
+
+        separate = OxmlElement("w:fldChar")
+        separate.set(qn("w:fldCharType"), "separate")
+        toc.add_run()._r.append(separate)
+        toc.add_run("Atualize o sumário ao abrir o documento.")
+
+        end = OxmlElement("w:fldChar")
+        end.set(qn("w:fldCharType"), "end")
+        toc.add_run()._r.append(end)
+
+        settings = doc.settings._element
+        update_fields = settings.find(qn("w:updateFields"))
+        if update_fields is None:
+            update_fields = OxmlElement("w:updateFields")
+            settings.append(update_fields)
+        update_fields.set(qn("w:val"), "true")
 
     @staticmethod
     def _replace_range(paragraph, start: int, end: int, value: str) -> None:

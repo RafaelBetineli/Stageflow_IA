@@ -69,7 +69,31 @@ O pipeline mantém os dados pessoais apenas em memória e grava os três documen
 em `output/docx/`. A entrada real e os documentos gerados são ignorados pelo Git.
 Use `--quantidade 1`, `2` ou `3` para alterar o número de atividades. Erros de
 entrada, composição ou preenchimento interrompem a execução com código de saída
-não zero, sem publicar documentos parciais.
+não zero, sem publicar documentos parciais. Por padrão, o pipeline recusa
+substituir documentos existentes. Use `--overwrite` somente após conferir que a
+demanda anterior pode ser substituída.
+
+## Operação de demandas reais
+
+Use uma pasta de saída exclusiva por demanda para manter os documentos e o
+registro de originalidade organizados:
+
+```powershell
+python src\pipeline_whatsapp_docx.py `
+  --input data\mensagem_zap.txt `
+  --output output\demandas\identificador_da_demanda
+```
+
+Antes da entrega, confira:
+
+- nome, RA, curso, área e módulo do estágio;
+- empresa, supervisor, datas e carga horária;
+- quantidade e pertinência das atividades selecionadas;
+- citações no texto e referências bibliográficas correspondentes;
+- ausência de placeholders, páginas vazias ou conteúdo cortado;
+- abertura dos três arquivos DOCX gerados.
+
+Para regenerar conscientemente os mesmos destinos, acrescente `--overwrite`.
 
 Campos textuais longos podem continuar em linhas recuadas:
 

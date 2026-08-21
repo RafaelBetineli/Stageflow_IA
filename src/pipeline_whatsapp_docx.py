@@ -149,10 +149,22 @@ def _publicar_documentos(temporarios: list[tuple[Path, Path]]) -> None:
             backup.unlink(missing_ok=True)
 
 
+def _validar_sobrescrita(destinos: tuple[Path, ...], overwrite: bool) -> None:
+    existentes = tuple(destino for destino in destinos if destino.exists())
+    if existentes and not overwrite:
+        lista = "\n- ".join(str(path) for path in existentes)
+        raise FileExistsError(
+            "Documentos de saída já existem. Use --overwrite para substituí-los:\n"
+            f"- {lista}"
+        )
+
+
 def run_pipeline(
     input_path: str | Path = CAMINHO_MENSAGEM,
     output_dir: str | Path = PASTA_SAIDA,
     quantidade: int = 3,
+    *,
+    overwrite: bool = False,
 ) -> tuple[Path, ...]:
     entrada = Path(input_path)
     saida = Path(output_dir)
@@ -167,6 +179,15 @@ def run_pipeline(
     contexto = resolver_contexto_estagio(dados["AREA_ESTAGIO"])
     _validar_arquivos(contexto)
     dados_enriquecidos = DataEnricher().enrich(dados, activity_count=quantidade)
+
+    nome_sanitizado = sanitizar_nome(dados_enriquecidos["NOME_ALUNO"])
+    if not nome_sanitizado:
+        raise ValueError("Nome do aluno não produz um nome de arquivo válido.")
+    destinos = tuple(
+        saida / f"{prefixo}_{nome_sanitizado}.docx"
+        for prefixo, _ in contexto["templates"]
+    )
+    _validar_sobrescrita(destinos, overwrite)
 
     repository = ActivityRepository(str(contexto["knowledge_base"]))
     atividades_disponiveis = repository.get_all()
@@ -195,15 +216,7 @@ def run_pipeline(
     )
     dados_finais = {**dados_enriquecidos, **dados_atividades, **dados_secoes}
 
-    nome_sanitizado = sanitizar_nome(dados_finais["NOME_ALUNO"])
-    if not nome_sanitizado:
-        raise ValueError("Nome do aluno não produz um nome de arquivo válido.")
-
     saida.mkdir(parents=True, exist_ok=True)
-    destinos = tuple(
-        saida / f"{prefixo}_{nome_sanitizado}.docx"
-        for prefixo, _ in contexto["templates"]
-    )
     with TemporaryDirectory(prefix=".stageflow_", dir=saida) as temporary_dir:
         temporarios: list[tuple[Path, Path]] = []
         for (prefixo, template), destino in zip(contexto["templates"], destinos):
@@ -220,13 +233,23 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument("--input", type=Path, default=CAMINHO_MENSAGEM)
     parser.add_argument("--output", type=Path, default=PASTA_SAIDA)
     parser.add_argument("--quantidade", type=int, default=3)
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="substitui documentos já existentes para o mesmo aluno",
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_argument_parser().parse_args(argv)
     try:
-        caminhos = run_pipeline(args.input, args.output, args.quantidade)
+        caminhos = run_pipeline(
+            args.input,
+            args.output,
+            args.quantidade,
+            overwrite=args.overwrite,
+        )
     except Exception as error:
         print(f"Erro: {error}", file=sys.stderr)
         return 1
