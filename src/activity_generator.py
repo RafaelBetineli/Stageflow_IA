@@ -37,6 +37,9 @@ class ActivityGenerationError(RuntimeError):
     """Uma atividade não pôde ser composta e validada."""
 
 
+RECOMPOSITION_VARIANT_STRIDE = 104_729
+
+
 class ActivityGenerator:
     """Gera placeholders ATV sem alterar a interface pública do pipeline."""
 
@@ -78,7 +81,9 @@ class ActivityGenerator:
     def _build_default_writer(self, *, attempt: int) -> DeterministicActivityComposer:
         return DeterministicActivityComposer(
             report_seed=self.report_seed,
-            variant_index=self.variant_index + attempt,
+            variant_index=(
+                self.variant_index + attempt * RECOMPOSITION_VARIANT_STRIDE
+            ),
             bibliography_catalog=self.bibliography_catalog,
         )
 
@@ -90,10 +95,17 @@ class ActivityGenerator:
     def generate(self, atividades: list[dict]) -> dict[str, str]:
         """Preenche ATV1...ATVn ou interrompe a geração na primeira falha."""
         for attempt in range(2):
-            textos = self._generate_once(
-                atividades,
-                writer=self._writer_for_attempt(attempt),
-            )
+            self.last_composition_attempts = attempt + 1
+            try:
+                textos = self._generate_once(
+                    atividades,
+                    writer=self._writer_for_attempt(attempt),
+                )
+            except ActivityGenerationError:
+                if self._writer_override is not None or attempt == 1:
+                    raise
+                print("[COMPOSIÇÃO] Segunda variante acionada após falha estrutural.")
+                continue
             sections = tuple(
                 textos[f"ATV{position}"]
                 for position in range(1, min(len(atividades), self.max_atividades) + 1)
@@ -141,7 +153,6 @@ class ActivityGenerator:
                 ),
             )
             self.last_originality_report = combined_report
-            self.last_composition_attempts = attempt + 1
             if combined_report.is_acceptable:
                 self.last_citation_ids = tuple(
                     dict.fromkeys(self._attempt_citation_ids)

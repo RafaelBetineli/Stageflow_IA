@@ -50,6 +50,15 @@ class RecordingWriter:
         return RecordedWritingResult(draft, report)
 
 
+class SequencedWriterGenerator(ActivityGenerator):
+    def __init__(self, writers: tuple[RecordingWriter, ...], **kwargs) -> None:
+        self._writers = writers
+        super().__init__(**kwargs)
+
+    def _build_default_writer(self, *, attempt: int) -> RecordingWriter:
+        return self._writers[min(attempt, len(self._writers) - 1)]
+
+
 class ActivityGeneratorIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -75,6 +84,22 @@ class ActivityGeneratorIntegrationTests(unittest.TestCase):
             generator.generate(self.activities[:2])
 
         self.assertEqual(1, len(writer.calls))
+
+    def test_default_composer_uses_one_bounded_structural_retry(self) -> None:
+        first = RecordingWriter(fail_positions={1})
+        second = RecordingWriter()
+        generator = SequencedWriterGenerator(
+            (first, second),
+            max_atividades=2,
+            report_seed="structural-retry",
+        )
+
+        result = generator.generate(self.activities[:2])
+
+        self.assertTrue(result["ATV1"])
+        self.assertEqual(1, len(first.calls))
+        self.assertEqual(2, len(second.calls))
+        self.assertEqual(2, generator.last_composition_attempts)
 
     def test_missing_positions_remain_empty(self) -> None:
         writer = RecordingWriter()

@@ -125,6 +125,21 @@ python -m compileall -q src tests
 
 O GitHub Actions executa a mesma suíte em cada `push` e `pull_request`.
 
+## Homologação de originalidade
+
+Para avaliar todas as áreas em lote, sem gravar os relatos gerados:
+
+```powershell
+python src\originality_audit.py --reports-per-area 25
+```
+
+A auditoria percorre todas as atividades nos três perfis narrativos, desconsidera
+citações e frases técnicas fixas da knowledge base no cálculo ajustado e exige
+relatórios, atividades, aberturas e parágrafos únicos. O limite padrão de
+similaridade Jaccard ajustada é `0.65`. O arquivo
+`output/originality_audit.json` contém somente áreas, contagens, máximos de
+similaridade e resultado de aprovação; nenhum texto ou dado pessoal é salvo.
+
 Antes de publicar uma nova knowledge base, toda atividade deve passar por
 `parse_activity_collection`, possuir ao menos um item em `referencias_ids` e
 usar somente IDs existentes no catálogo correspondente.

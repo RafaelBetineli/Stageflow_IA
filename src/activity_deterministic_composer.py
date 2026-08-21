@@ -153,6 +153,21 @@ OPENING_VARIANTS = (
     "Entre os atendimentos acompanhados, a atividade de {title} aproximou o conteúdo acadêmico da rotina profissional.",
 )
 
+COMPACT_OPENING_VARIANTS = (
+    "Na rotina de {title}, concentrei minha atenção nos detalhes observados.",
+    "O contato com {title} ocorreu dentro da prática supervisionada.",
+    "Entre as rotinas do estágio, observei aspectos de {title}.",
+    "A vivência de {title} integrou meu acompanhamento naquele período.",
+    "No estágio, registrei os pontos centrais relacionados a {title}.",
+    "A prática de {title} foi observada junto à equipe responsável.",
+    "Meu registro de {title} partiu da rotina acompanhada no estágio.",
+    "Durante a experiência prática, acompanhei aspectos ligados a {title}.",
+    "A observação de {title} ocorreu nos limites definidos pela supervisão.",
+    "Na atividade de {title}, mantive atenção à condução profissional.",
+    "O estágio proporcionou contato supervisionado com a rotina de {title}.",
+    "Como parte da prática, registrei o acompanhamento de {title}.",
+)
+
 OPENING_DETAIL_ACTIONS = (
     "com atenção voltada",
     "com foco",
@@ -181,6 +196,21 @@ OPENING_DETAIL_FOCUSES = (
     "aos registros feitos durante a prática",
     "à supervisão mantida pela equipe",
     "aos conhecimentos relacionados à atividade",
+)
+
+OPENING_PERSPECTIVES = (
+    "registrei ainda a sequência daquele momento",
+    "mantive o recorte próprio da experiência acadêmica",
+    "considerei também as explicações recebidas",
+    "relacionei esses pontos ao conteúdo estudado",
+    "preservei os limites da observação como estudante",
+    "acompanhei o que foi apresentado pela supervisão",
+    "organizei o relato a partir do que presenciei",
+    "retomei os cuidados explicados pela equipe",
+    "descrevi somente as etapas que pude observar",
+    "associei a prática às orientações recebidas",
+    "mantive o registro ligado à rotina presenciada",
+    "considerei a condução adotada naquele atendimento",
 )
 
 TECHNICAL_OPENING_VARIANTS = (
@@ -235,6 +265,21 @@ LEAD_SUFFIX_PREDICATES = (
     "permitiu registrar a atividade sem assumir decisões profissionais",
     "reforçou os limites da minha participação como estudante",
     "aproximou o conteúdo acadêmico da situação acompanhada",
+)
+
+LEAD_SUFFIX_CONTEXTS = (
+    "naquele momento",
+    "ao longo da etapa",
+    "dentro da rotina",
+    "sob condução da equipe",
+    "no contexto observado",
+    "a partir da prática",
+    "durante o acompanhamento",
+    "conforme a supervisão",
+    "na experiência registrada",
+    "segundo a sequência presenciada",
+    "com foco técnico",
+    "nos limites do estágio",
 )
 
 BOOSTERS = {
@@ -320,9 +365,18 @@ class NarrativeVariation:
             self.index // len(LEAD_SUFFIX_SUBJECTS)
             + _stable_offset(f"{key}:suffix-predicate", len(LEAD_SUFFIX_PREDICATES))
         ) % len(LEAD_SUFFIX_PREDICATES)
+        context_index = (
+            self.index
+            // (len(LEAD_SUFFIX_SUBJECTS) * len(LEAD_SUFFIX_PREDICATES))
+            + _stable_offset(
+                f"{self.seed}:{key}:suffix-context",
+                len(LEAD_SUFFIX_CONTEXTS),
+            )
+        ) % len(LEAD_SUFFIX_CONTEXTS)
         suffix = (
             f"{LEAD_SUFFIX_SUBJECTS[subject_index]} "
-            f"{LEAD_SUFFIX_PREDICATES[predicate_index]}."
+            f"{LEAD_SUFFIX_PREDICATES[predicate_index]} "
+            f"{LEAD_SUFFIX_CONTEXTS[context_index]}."
         )
         return f"{base} {suffix}"
 
@@ -354,12 +408,7 @@ def _article_for(fact: str) -> str:
     return "o"
 
 
-def _opening_sentences(
-    activity: EnrichedActivity,
-    variation: NarrativeVariation,
-    inline_citation: str,
-    activity_position: int,
-) -> list[str]:
+def _opening_title(activity: EnrichedActivity) -> str:
     opening_title = activity.titulo
     normalized_title = activity.titulo.casefold()
     if normalized_title in activity.contexto_seguro.casefold() or any(
@@ -368,6 +417,16 @@ def _opening_sentences(
         for fact in activity.fatos_permitidos.get(group)
     ):
         opening_title = activity.categoria
+    return opening_title
+
+
+def _opening_sentences(
+    activity: EnrichedActivity,
+    variation: NarrativeVariation,
+    inline_citation: str,
+    activity_position: int,
+) -> list[str]:
+    opening_title = _opening_title(activity)
 
     context_parts = [
         part.strip()
@@ -391,6 +450,14 @@ def _opening_sentences(
         variation.index
         // (len(OPENING_VARIANTS) * len(OPENING_DETAIL_ACTIONS))
     ) % len(OPENING_DETAIL_FOCUSES)
+    opening_perspective_index = (
+        variation.index
+        // (
+            len(OPENING_VARIANTS)
+            * len(OPENING_DETAIL_ACTIONS)
+            * len(OPENING_DETAIL_FOCUSES)
+        )
+    ) % len(OPENING_PERSPECTIVES)
     technical_index = (
         variation.index // len(OPENING_VARIANTS) + activity_position - 1
     ) % len(TECHNICAL_OPENING_VARIANTS)
@@ -405,7 +472,7 @@ def _opening_sentences(
             )
             + f", {OPENING_DETAIL_ACTIONS[opening_action_index]} "
             + OPENING_DETAIL_FOCUSES[opening_focus_index]
-            + "."
+            + f"; {OPENING_PERSPECTIVES[opening_perspective_index]}."
         )
     ]
     if inline_citation:
@@ -545,6 +612,146 @@ def _fact_sentences(
     return sentences
 
 
+def _compact_opening_sentences(
+    activity: EnrichedActivity,
+    expanded_sentences: list[str],
+    inline_citation: str,
+    variation: NarrativeVariation,
+    activity_position: int,
+) -> list[str]:
+    opening_index = (
+        variation.index + activity_position - 1
+    ) % len(COMPACT_OPENING_VARIANTS)
+    action_index = (
+        variation.index // len(COMPACT_OPENING_VARIANTS) + activity_position - 1
+    ) % len(OPENING_DETAIL_ACTIONS)
+    focus_index = (
+        variation.index
+        // (len(COMPACT_OPENING_VARIANTS) * len(OPENING_DETAIL_ACTIONS))
+    ) % len(OPENING_DETAIL_FOCUSES)
+    perspective_index = (
+        variation.index
+        // (
+            len(COMPACT_OPENING_VARIANTS)
+            * len(OPENING_DETAIL_ACTIONS)
+            * len(OPENING_DETAIL_FOCUSES)
+        )
+    ) % len(OPENING_PERSPECTIVES)
+    compact_opening = _strip_terminal_punctuation(
+        COMPACT_OPENING_VARIANTS[opening_index].format(
+            title=_opening_title(activity)
+        )
+    )
+    sentences = [
+        compact_opening
+        + f", {OPENING_DETAIL_ACTIONS[action_index]} "
+        + OPENING_DETAIL_FOCUSES[focus_index]
+        + f"; {OPENING_PERSPECTIVES[perspective_index]}."
+    ]
+    if inline_citation:
+        sentences.append(expanded_sentences[1])
+    sentences.append("Minha participação permaneceu supervisionada.")
+    return sentences
+
+
+def _compact_fact_sentences(
+    activity: EnrichedActivity,
+    allocation: AllocatedParagraph,
+    variation: NarrativeVariation,
+) -> list[str]:
+    learning_facts = set(activity.fatos_permitidos.orientacoes_aprendizado)
+    sentences: list[str] = []
+    for index, fact in enumerate(allocation.facts):
+        clean_fact = _strip_terminal_punctuation(fact)
+        normalized = clean_fact.casefold()
+        variant = (
+            variation.index
+            + _stable_offset(
+                f"{variation.seed}:{allocation.spec.key}:{clean_fact}:compact",
+                8,
+            )
+            + index
+        ) % 8
+        if fact not in learning_facts:
+            templates = (
+                "A etapa incluiu {article} {fact}.",
+                "Registrei {article} {fact}.",
+                "Observei {article} {fact}.",
+                "Também acompanhei {article} {fact}.",
+                "Minha atenção incluiu {article} {fact}.",
+                "Entre os pontos esteve {article} {fact}.",
+                "Na rotina, acompanhei {article} {fact}.",
+                "Na prática, observei {article} {fact}.",
+            )
+            sentences.append(
+                templates[variant].format(
+                    article=_article_for(clean_fact),
+                    fact=clean_fact,
+                )
+            )
+        elif normalized.startswith("compreensão"):
+            templates = (
+                "Ampliei minha {fact}.",
+                "A prática ampliou minha {fact}.",
+                "Fortaleci minha {fact}.",
+                "A vivência favoreceu minha {fact}.",
+                "O aprendizado envolveu minha {fact}.",
+                "A atividade contribuiu para minha {fact}.",
+                "A rotina tornou mais concreta minha {fact}.",
+                "O acompanhamento aprofundou minha {fact}.",
+            )
+            sentences.append(templates[variant].format(fact=clean_fact))
+        elif normalized.startswith(("importância", "necessidade", "relevância")):
+            templates = (
+                "Reconheci a {fact}.",
+                "A vivência evidenciou a {fact}.",
+                "A prática destacou a {fact}.",
+                "Também percebi a {fact}.",
+                "A rotina reforçou a {fact}.",
+                "O aprendizado mostrou a {fact}.",
+                "A atividade tornou clara a {fact}.",
+                "Entre os aprendizados esteve a {fact}.",
+            )
+            sentences.append(templates[variant].format(fact=clean_fact))
+        elif normalized.startswith("orientações"):
+            templates = (
+                "Registrei as {fact}.",
+                "Acompanhei as {fact}.",
+                "Observei as {fact}.",
+                "Também anotei as {fact}.",
+                "A etapa incluiu as {fact}.",
+                "Minha atenção alcançou as {fact}.",
+                "A rotina contemplou as {fact}.",
+                "Entre os pontos estiveram as {fact}.",
+            )
+            sentences.append(templates[variant].format(fact=clean_fact))
+        elif normalized.startswith("orientação"):
+            templates = (
+                "Registrei a {fact}.",
+                "Acompanhei a {fact}.",
+                "Observei a {fact}.",
+                "Também anotei a {fact}.",
+                "A etapa incluiu a {fact}.",
+                "Minha atenção alcançou a {fact}.",
+                "A rotina contemplou a {fact}.",
+                "Entre os pontos esteve a {fact}.",
+            )
+            sentences.append(templates[variant].format(fact=clean_fact))
+        else:
+            templates = (
+                "O aprendizado incluiu {fact}.",
+                "A prática abordou {fact}.",
+                "A vivência acrescentou {fact}.",
+                "Também compreendi {fact}.",
+                "A atividade envolveu {fact}.",
+                "A rotina aproximou meu estudo de {fact}.",
+                "Entre os conteúdos esteve {fact}.",
+                "A reflexão técnica alcançou {fact}.",
+            )
+            sentences.append(templates[variant].format(fact=clean_fact))
+    return sentences
+
+
 def _candidate_boosters(
     activity: EnrichedActivity,
     allocation: AllocatedParagraph,
@@ -579,6 +786,14 @@ def _render_paragraph(
             inline_citation,
             activity_position,
         )
+        if count_words(" ".join(sentences)) > allocation.spec.max_words:
+            sentences = _compact_opening_sentences(
+                activity,
+                sentences,
+                inline_citation,
+                variation,
+                activity_position,
+            )
     else:
         sentences = [
             variation.choose_lead(
@@ -586,7 +801,10 @@ def _render_paragraph(
                 f"{activity.titulo}:{allocation.spec.key}:lead",
             )
         ]
-    sentences.extend(_fact_sentences(activity, allocation, variation))
+    fact_sentences = _fact_sentences(activity, allocation, variation)
+    if count_words(" ".join(sentences + fact_sentences)) > allocation.spec.max_words:
+        fact_sentences = _compact_fact_sentences(activity, allocation, variation)
+    sentences.extend(fact_sentences)
 
     target = allocation.spec.min_words + min(
         8,
